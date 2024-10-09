@@ -14,6 +14,8 @@ Desarrollar una **prueba de concepto** de un personalizador de páginas web. Est
 
 ---
 
+![PageCraft](./readme-img/page-demo.png)
+
 ## 🚀 **Cómo empezar**
 
 1. **Usar la plantilla en tu organización:**
