@@ -8,43 +8,58 @@ const companyData = {
     "https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D",
 };
 
-//CAMBIANDO EL NOMBRE Y TITULO
-const newCompanyName = document.querySelector('.logo');
-newCompanyName.textContent = companyData.name;
-companyData.name[0].toUpperCase;
+document.addEventListener('DOMContentLoaded', () => {
 
-const newTitle = document.getElementById('headTitle');
-newTitle.textContent = companyData.name;
+  const newCompanyName = document.querySelector('.logo');
+  newCompanyName.textContent = companyData.name;
+  companyData.name[0].toUpperCase;
 
-//CAMBIANDO LA IMAGEN
-const setImage = document.getElementById('companyImage');
-setImage.setAttribute("src", companyData.imageUrl);
+  const newTitlePage = document.getElementById('headTitle');
+  newTitlePage.textContent = companyData.name;
 
-//CAMBIANDO EL CLAIM Y EL TEXTO
-const newClaim = document.getElementById('companyClaim');
-newClaim.textContent = companyData.claim;
+  const setNewImage = document.getElementById('companyImage');
+  setNewImage.setAttribute("src", companyData.imageUrl);
 
-const newText = document.getElementById('companyText');
-newText.textContent = companyData.text;
+  const newClaim = document.getElementById('companyClaim');
+  newClaim.textContent = companyData.claim;
 
-//ACCEDIENDO AL BACKGROUND & PRIMARY COLOR DESDE EL COMPANY DATA
-document.documentElement.style.setProperty('--back-color', companyData.backgroundColor);
+  const newText = document.getElementById('companyText');
+  newText.textContent = companyData.text;
 
-document.documentElement.style.setProperty('--primary-color', companyData.primaryColor);
+  document.documentElement.style.setProperty('--back-color', companyData.backgroundColor);
 
-//ACCEDIENDO AL FORMULARIO DESDE EL BOTON
-function openForm() {
-  const editForm = document.getElementById('companyForm');
-  editForm.style.display = "block";
-};
+  document.documentElement.style.setProperty('--primary-color', companyData.primaryColor);
 
-function closeForm() {
-  const hiddenForm = document.getElementById('companyForm');
-  hiddenForm.style.display = "none";
-};
+  function openForm() {
+    const showForm = document.getElementById('companyForm');
+    showForm.style.display = "block";
+  };
 
-const editButton = document.getElementById('editCompanyBtn');
-editButton.addEventListener('click', openForm);
+  function closeForm() {
+    const hiddenForm = document.getElementById('companyForm');
+    hiddenForm.style.display = "none";
+  };
 
-const closeButton = document.getElementById('closeCompanyFormBtn');
-closeButton.addEventListener('click', closeForm)
+  const editButton = document.getElementById('editCompanyBtn');
+  editButton.addEventListener('click', openForm);
+
+  const closeButton = document.getElementById('closeCompanyFormBtn');
+  closeButton.addEventListener('click', closeForm)
+
+  const reloadedDataCompanyName = document.getElementById("companyNameInput");
+  reloadedDataCompanyName.value = companyData.name;
+
+  const reloadedDataClaim = document.getElementById("companyClaimInput");
+  reloadedDataClaim.value = companyData.claim;
+
+  const reloadedDataImg = document.getElementById("companyImageURLInput");
+  reloadedDataImg.value = companyData.imageUrl;
+
+  const reloadedPrimaryColor = document.getElementById("primaryColor");
+  reloadedPrimaryColor.value = companyData.primaryColor;
+
+  const reloadedSecondaryColor = document.getElementById("backgroundColor");
+  reloadedSecondaryColor.value = companyData.backgroundColor;
+
+});
+
