@@ -5,7 +5,7 @@ const companyData = {
   claim: "We make the best widgets",
   text: "We are the best company in the world, except for the other companies that are better than us.",
   imageUrl:
-    "https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D",
+    "https:plus.unsplash.com/premium_photo-1664474619075-644dd191935f?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D",
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -49,9 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const reloadedDataCompanyName = document.getElementById("companyNameInput");
   reloadedDataCompanyName.value = companyData.name;
 
-  const reloadedDataClaim = document.getElementById("companyClaimInput");
-  reloadedDataClaim.value = companyData.claim;
-
   const reloadedDataImg = document.getElementById("companyImageURLInput");
   reloadedDataImg.value = companyData.imageUrl;
 
@@ -61,7 +58,33 @@ document.addEventListener('DOMContentLoaded', () => {
   const reloadedSecondaryColor = document.getElementById("backgroundColor");
   reloadedSecondaryColor.value = companyData.backgroundColor;
 
-  const editForm = document.getElementById("#companyForm");
+  const reloadedDataClaim = document.getElementById("companyClaimInput");
+  reloadedDataClaim.value = companyData.claim;
+
+  const reloadedTextArea = document.getElementById("companyTextInput");
+  reloadedTextArea.value = companyData.text;
+
+  const storedData = localStorage.getItem("dataInput");
+  if (storedData) {
+    const dataSaved = JSON.parse(storedData);
+
+     document.getElementById("companyNameInput").value = dataSaved.company;
+     document.getElementById("companyImageURLInput").value = dataSaved.companyImage;
+     document.getElementById("primaryColor").value = dataSaved.primaryColor;
+     document.getElementById("backgroundColor").value = dataSaved.secondaryColor;
+     document.getElementById("companyClaimInput").value = dataSaved.claim;
+     document.getElementById("companyTextInput").value = dataSaved.textArea;
+
+     document.getElementById("companyName").textContent = dataSaved.company;
+     document.getElementById("companyImage").setAttribute("src", dataSaved.companyImage);
+     document.documentElement.style.setProperty('--primary-color', dataSaved.primaryColor);
+     document.documentElement.style.setProperty('--back-color', dataSaved.secondaryColor);
+     document.getElementById("companyClaim").textContent = dataSaved.claim;
+     document.getElementById("companyText").textContent = dataSaved.textArea;
+ }
+
+  const editForm = document.getElementById("companyForm");
+
   editForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
@@ -71,22 +94,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const backgroundColorInput = document.getElementById("backgroundColor");
     const claimCompanyInput = document.getElementById("companyClaimInput");
     const textCompanyInput = document.getElementById("companyTextInput");
-    const inputDataUser = {};
-
-    inputDataUser.company = nameCompanyInput.value;
-    inputDataUser.companyImage = imgCompanyInput.value;
-    inputDataUser.primaryColor = primaryColorInput.value;
-    inputDataUser.secondaryColor = backgroundColorInput.value;
-    inputDataUser.claim = claimCompanyInput.value;
-    inputDataUser.textArea = textCompanyInput.value;
+    
+    const inputDataUser = {
+    company: nameCompanyInput.value,
+    companyImage: imgCompanyInput.value,
+    primaryColor: primaryColorInput.value,
+    secondaryColor: backgroundColorInput.value,
+    claim: claimCompanyInput.value,
+    textArea: textCompanyInput.value,
+    };
+    
+    const inputDataObjectToJson = JSON.stringify(inputDataUser);
+    localStorage.setItem("dataInput", inputDataObjectToJson);
 
     document.getElementById("companyName").textContent = inputDataUser.company;
     document.getElementById("companyImage").setAttribute("src", inputDataUser.companyImage);
-    document.documentElement.style.setProperty('--back-color', inputDataUser.primaryColor);
-    document.documentElement.style.setProperty('--primary-color', inputDataUser.secondaryColor);
+    document.documentElement.style.setProperty('--primary-color', inputDataUser.primaryColor);
+    document.documentElement.style.setProperty('--back-color', inputDataUser.secondaryColor);
     document.getElementById("companyClaim").textContent = inputDataUser.claim;
     document.getElementById("companyText").textContent = inputDataUser.textArea;
-  })
 
+    closeForm();
+  })
 });
 
