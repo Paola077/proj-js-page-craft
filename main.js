@@ -61,5 +61,32 @@ document.addEventListener('DOMContentLoaded', () => {
   const reloadedSecondaryColor = document.getElementById("backgroundColor");
   reloadedSecondaryColor.value = companyData.backgroundColor;
 
+  const editForm = document.getElementById("#companyForm");
+  editForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const nameCompanyInput = document.getElementById("companyNameInput");
+    const imgCompanyInput = document.getElementById("companyImageURLInput");
+    const primaryColorInput = document.getElementById("primaryColor");
+    const backgroundColorInput = document.getElementById("backgroundColor");
+    const claimCompanyInput = document.getElementById("companyClaimInput");
+    const textCompanyInput = document.getElementById("companyTextInput");
+    const inputDataUser = {};
+
+    inputDataUser.company = nameCompanyInput.value;
+    inputDataUser.companyImage = imgCompanyInput.value;
+    inputDataUser.primaryColor = primaryColorInput.value;
+    inputDataUser.secondaryColor = backgroundColorInput.value;
+    inputDataUser.claim = claimCompanyInput.value;
+    inputDataUser.textArea = textCompanyInput.value;
+
+    document.getElementById("companyName").textContent = inputDataUser.company;
+    document.getElementById("companyImage").setAttribute("src", inputDataUser.companyImage);
+    document.documentElement.style.setProperty('--back-color', inputDataUser.primaryColor);
+    document.documentElement.style.setProperty('--primary-color', inputDataUser.secondaryColor);
+    document.getElementById("companyClaim").textContent = inputDataUser.claim;
+    document.getElementById("companyText").textContent = inputDataUser.textArea;
+  })
+
 });
 
